@@ -54,6 +54,7 @@
 		2996EE4C1B0C303E00A26564 /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+FontAwesome.h"; path = "FontAwesome/UIImage+FontAwesome.h"; sourceTree = "<group>"; };
 		2996EE4D1B0C303E00A26564 /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+FontAwesome.m"; path = "FontAwesome/UIImage+FontAwesome.m"; sourceTree = "<group>"; };
 		2996EE541B0C304A00A26564 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = FontAwesome/Resources/FontAwesome.ttf; sourceTree = "<group>"; };
+		2996EE561B0C30BB00A26564 /* CricketUmp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricketUmp-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +103,7 @@
 				2996EE251B0C2FBF00A26564 /* ViewController.swift */,
 				2996EE2C1B0C2FBF00A26564 /* LaunchScreen.xib */,
 				2996EE271B0C2FBF00A26564 /* Main.storyboard */,
+				2996EE561B0C30BB00A26564 /* CricketUmp-Bridging-Header.h */,
 			);
 			path = CricketUmp;
 			sourceTree = "<group>";
@@ -387,6 +389,7 @@
 				INFOPLIST_FILE = CricketUmp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CricketUmp/CricketUmp-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -397,6 +400,7 @@
 				INFOPLIST_FILE = CricketUmp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CricketUmp/CricketUmp-Bridging-Header.h";
 			};
 			name = Release;
 		};
