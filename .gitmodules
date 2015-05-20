@@ -1,0 +1,3 @@
+[submodule "CricketUmp/CricketUmp/FontAwesome"]
+	path = CricketUmp/CricketUmp/FontAwesome
+	url = https://github.com/alexdrone/ios-fontawesome.git
