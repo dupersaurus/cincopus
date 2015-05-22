@@ -20,6 +20,7 @@
 		2996EE521B0C303E00A26564 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2996EE4B1B0C303E00A26564 /* UIFont+FontAwesome.m */; };
 		2996EE531B0C303E00A26564 /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2996EE4D1B0C303E00A26564 /* UIImage+FontAwesome.m */; };
 		2996EE551B0C304A00A26564 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2996EE541B0C304A00A26564 /* FontAwesome.ttf */; };
+		2996EE581B0D831000A26564 /* device4in.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2996EE571B0D831000A26564 /* device4in.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		2996EE4D1B0C303E00A26564 /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+FontAwesome.m"; path = "FontAwesome/UIImage+FontAwesome.m"; sourceTree = "<group>"; };
 		2996EE541B0C304A00A26564 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = FontAwesome/Resources/FontAwesome.ttf; sourceTree = "<group>"; };
 		2996EE561B0C30BB00A26564 /* CricketUmp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricketUmp-Bridging-Header.h"; sourceTree = "<group>"; };
+		2996EE571B0D831000A26564 /* device4in.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = device4in.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				2996EE251B0C2FBF00A26564 /* ViewController.swift */,
 				2996EE2C1B0C2FBF00A26564 /* LaunchScreen.xib */,
 				2996EE271B0C2FBF00A26564 /* Main.storyboard */,
+				2996EE571B0D831000A26564 /* device4in.storyboard */,
 				2996EE561B0C30BB00A26564 /* CricketUmp-Bridging-Header.h */,
 			);
 			path = CricketUmp;
@@ -233,6 +236,7 @@
 			files = (
 				2996EE291B0C2FBF00A26564 /* Main.storyboard in Resources */,
 				2996EE551B0C304A00A26564 /* FontAwesome.ttf in Resources */,
+				2996EE581B0D831000A26564 /* device4in.storyboard in Resources */,
 				2996EE4F1B0C303E00A26564 /* FontAwesome+iOS.podspec in Resources */,
 				2996EE2E1B0C2FBF00A26564 /* LaunchScreen.xib in Resources */,
 				2996EE2B1B0C2FBF00A26564 /* Images.xcassets in Resources */,
