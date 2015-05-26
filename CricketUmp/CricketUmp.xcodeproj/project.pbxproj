@@ -21,6 +21,11 @@
 		2996EE531B0C303E00A26564 /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2996EE4D1B0C303E00A26564 /* UIImage+FontAwesome.m */; };
 		2996EE551B0C304A00A26564 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2996EE541B0C304A00A26564 /* FontAwesome.ttf */; };
 		2996EE581B0D831000A26564 /* device4in.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2996EE571B0D831000A26564 /* device4in.storyboard */; };
+		2996EEBA1B0FC94000A26564 /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEB91B0FC94000A26564 /* Delivery.swift */; };
+		2996EEBC1B0FD05100A26564 /* Over.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEBB1B0FD05100A26564 /* Over.swift */; };
+		2996EEBE1B12116500A26564 /* Innings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEBD1B12116500A26564 /* Innings.swift */; };
+		2996EEC01B12158300A26564 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEBF1B12158300A26564 /* Game.swift */; };
+		2996EEC21B15282900A26564 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEC11B15282800A26564 /* Timer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,11 @@
 		2996EE541B0C304A00A26564 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = FontAwesome/Resources/FontAwesome.ttf; sourceTree = "<group>"; };
 		2996EE561B0C30BB00A26564 /* CricketUmp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CricketUmp-Bridging-Header.h"; sourceTree = "<group>"; };
 		2996EE571B0D831000A26564 /* device4in.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = device4in.storyboard; sourceTree = "<group>"; };
+		2996EEB91B0FC94000A26564 /* Delivery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Delivery.swift; path = CricketGame/CricketGame/Delivery.swift; sourceTree = "<group>"; };
+		2996EEBB1B0FD05100A26564 /* Over.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Over.swift; sourceTree = "<group>"; };
+		2996EEBD1B12116500A26564 /* Innings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Innings.swift; sourceTree = "<group>"; };
+		2996EEBF1B12158300A26564 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		2996EEC11B15282800A26564 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = ../../../FencingRefSwift/FencingRefSwift/Timer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +113,12 @@
 				2996EE2A1B0C2FBF00A26564 /* Images.xcassets */,
 				2996EE231B0C2FBF00A26564 /* AppDelegate.swift */,
 				2996EE251B0C2FBF00A26564 /* ViewController.swift */,
+				2996EEC11B15282800A26564 /* Timer.swift */,
 				2996EE2C1B0C2FBF00A26564 /* LaunchScreen.xib */,
 				2996EE271B0C2FBF00A26564 /* Main.storyboard */,
 				2996EE571B0D831000A26564 /* device4in.storyboard */,
 				2996EE561B0C30BB00A26564 /* CricketUmp-Bridging-Header.h */,
+				2996EE591B0EB48A00A26564 /* Game */,
 			);
 			path = CricketUmp;
 			sourceTree = "<group>";
@@ -152,6 +164,17 @@
 				2996EE4D1B0C303E00A26564 /* UIImage+FontAwesome.m */,
 			);
 			name = FontAwesome;
+			sourceTree = "<group>";
+		};
+		2996EE591B0EB48A00A26564 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				2996EEB91B0FC94000A26564 /* Delivery.swift */,
+				2996EEBB1B0FD05100A26564 /* Over.swift */,
+				2996EEBD1B12116500A26564 /* Innings.swift */,
+				2996EEBF1B12158300A26564 /* Game.swift */,
+			);
+			name = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,8 +283,13 @@
 				2996EE501B0C303E00A26564 /* NSString+FontAwesome.m in Sources */,
 				2996EE511B0C303E00A26564 /* String+FontAwesome.swift in Sources */,
 				2996EE4E1B0C303E00A26564 /* FAImageView.m in Sources */,
+				2996EEC21B15282900A26564 /* Timer.swift in Sources */,
+				2996EEBC1B0FD05100A26564 /* Over.swift in Sources */,
+				2996EEBE1B12116500A26564 /* Innings.swift in Sources */,
 				2996EE261B0C2FBF00A26564 /* ViewController.swift in Sources */,
+				2996EEC01B12158300A26564 /* Game.swift in Sources */,
 				2996EE241B0C2FBF00A26564 /* AppDelegate.swift in Sources */,
+				2996EEBA1B0FC94000A26564 /* Delivery.swift in Sources */,
 				2996EE521B0C303E00A26564 /* UIFont+FontAwesome.m in Sources */,
 				2996EE531B0C303E00A26564 /* UIImage+FontAwesome.m in Sources */,
 			);
