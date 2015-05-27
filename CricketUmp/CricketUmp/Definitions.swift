@@ -50,12 +50,41 @@ public enum Wicket {
     case Retired
 }
 
-public typealias OverCount = (overs:Int, balls:Int)
+/// Wrapper for passing around the over count of an innings.
+public struct OverCount {
+    private let m_iCompleted:Int;
+    private let m_iBalls:Int;
+    
+    init() {
+        m_iCompleted = 0;
+        m_iBalls = 0;
+    }
+    
+    init (completedOvers iOvers:Int, balls iBalls:Int) {
+        m_iCompleted = iOvers;
+        m_iBalls = iBalls;
+    }
+    
+    /// Number of fully completed overs
+    public var overs:Int {
+        return m_iCompleted;
+    }
+    
+    /// Number of balls in the current over
+    public var balls:Int {
+        return m_iBalls;
+    }
+}
 
 /// A handy wrapper for passing scores, easier than having to tuple everywhere.
 public struct Score {
     private let m_iRuns:Int;
     private let m_iWickets:Int;
+    
+    init() {
+        m_iRuns = 0;
+        m_iWickets = 0;
+    }
     
     init(runs iRuns:Int, wickets iWickets:Int) {
         m_iRuns = iRuns;

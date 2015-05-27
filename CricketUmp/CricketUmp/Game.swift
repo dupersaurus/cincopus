@@ -44,26 +44,26 @@ public class Game {
     }
     
     /// Update the over count
-    private var m_cbUpdateOvers:((completed:Int, balls:Int)->Void)?;
+    private var m_cbUpdateOvers:((count:OverCount)->Void)?;
     
     /**
     Set the method to call when the over is updated
     
     :param: callback The callback
     */
-    public func setUpdateOversCallback(callback:((completed:Int, balls:Int)->Void)?) {
+    public func setUpdateOversCallback(callback:((count:OverCount)->Void)?) {
         m_cbUpdateOvers = callback;
     }
     
     /// Update the score and wickets
-    private var m_cbUpdateScore:((runs:Int, wickets:Int)->Void)?;
+    private var m_cbUpdateScore:((score:Score)->Void)?;
     
     /**
     Set the method to call when the score is updated
     
     :param: callback The callback
     */
-    public func setUpdateScoreCallback(callback:((runs:Int, wickets:Int)->Void)?) {
+    public func setUpdateScoreCallback(callback:((score:Score)->Void)?) {
         m_cbUpdateScore = callback;
     }
     
@@ -120,11 +120,11 @@ public class Game {
     }
     
     func updateScore(score:Score) {
-        m_cbUpdateScore?(runs: score.runs, wickets: score.wickets);
+        m_cbUpdateScore?(score: score);
     }
     
     func updateOvers(overs:OverCount) {
-        m_cbUpdateOvers?(completed: overs.overs, balls: overs.balls);
+        m_cbUpdateOvers?(count: overs);
     }
     
     func updateTimer(fTime:NSTimeInterval) {

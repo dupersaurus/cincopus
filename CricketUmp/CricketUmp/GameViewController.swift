@@ -15,7 +15,7 @@ class GameViewController : UIViewController {
     private var m_game:Game?;
     
     /// Completed over count
-    private var m_overs:OverCount = (0,0);
+    private var m_overs:OverCount?;
     
     private var m_userDefaults:NSUserDefaults?;
     
@@ -29,6 +29,7 @@ class GameViewController : UIViewController {
     /// Label displays the score and wickets
     @IBOutlet weak var m_scoreLabel: UILabel!
     
+    @IBOutlet weak var m_overCountLabel: UILabel!
     @IBOutlet weak var m_deliveryResults: UISegmentedControl!
     /**
     Called by buttons to set the number of runs/extras scored.
@@ -85,8 +86,8 @@ class GameViewController : UIViewController {
         m_game?.setUpdateOversCallback(onOversChange);
         m_game?.setUpdateScoreCallback(onScoreChange);
         
-        onOversChange(0, balls: 0);
-        onScoreChange(0, wickets: 0);
+        onOversChange(OverCount());
+        onScoreChange(Score());
         onTimerTick(0);
         
         m_game?.letsPlay();
@@ -97,19 +98,24 @@ class GameViewController : UIViewController {
     /**
     Called by the game when the over count changes
     */
-    func onOversChange(completed:Int, balls:Int) {
-        m_overs.overs = completed;
-        m_overs.balls = balls;
+    func onOversChange(count:OverCount) {
+        m_overs = count;
+        
+        if (m_overs != nil) {
+            m_overCountLabel.text = "Overs: \((m_overs?.overs)!).\((m_overs?.balls)!)";
+        } else {
+            m_overCountLabel.text = "Overs: 0.0";
+        }
     }
     
     /**
     Called by the game when the score changes
     */
-    func onScoreChange(runs:Int, wickets:Int) {
+    func onScoreChange(score: Score) {
         if m_userDefaults!.boolForKey("aussieStyle") {
-            m_scoreLabel.text = "\(wickets)/\(runs)";
+            m_scoreLabel.text = "\(score.wickets)/\(score.runs)";
         } else {
-            m_scoreLabel.text = "\(runs)/\(wickets)";
+            m_scoreLabel.text = "\(score.runs)/\(score.wickets)";
         }
     }
     
@@ -119,12 +125,12 @@ class GameViewController : UIViewController {
     func onTimerTick(time:NSTimeInterval) {
         m_inningsTimerLabel.text = Timer.getTimeString(timeInSeconds: time);
         
-        if (m_overs.overs > 0 && m_overs.balls > 0) {
-            let fOverPct:Double = Double(m_overs.overs) + Double(m_overs.balls) / 6;
-            let fOverRate = time / fOverPct;
-            m_overRateLabel.text = Timer.getTimeString(timeInSeconds: fOverRate);
-        } else {
+        if (m_overs?.overs == 0 && m_overs?.balls == 0) {
             m_overRateLabel.text = "--";
+        } else {
+            let fOverPct:Double = Double((m_overs?.overs)!) + Double((m_overs?.balls)!) / 6;
+            let fOverRate = time / fOverPct;
+            m_overRateLabel.text = Timer.getTimeString(timeInSeconds: fOverRate) + " min/over";
         }
     }
 }

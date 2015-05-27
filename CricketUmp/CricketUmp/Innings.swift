@@ -53,7 +53,7 @@ public class Innings {
         "balls" (Int8) is the number of legal deliveries made in the current over
     */
     public func getOversCompleted() -> OverCount {
-        return (m_currentOver, 6 - m_overs[m_currentOver].getBallsLeft());
+        return OverCount(completedOvers: m_currentOver, balls: 6 - m_overs[m_currentOver].getBallsLeft());
     }
     
     /**
@@ -80,10 +80,11 @@ public class Innings {
         
         // Over is completed
         if m_overs[m_currentOver].addDelivery(delivery, wicket: wicket, runs: UInt8(iRuns)) {
-            
+            createNewOver();
         }
         
         m_game.updateScore(countScore());
+        m_game.updateOvers(countOvers());
     }
     
     /**
@@ -103,6 +104,11 @@ public class Innings {
         m_currentOver = m_overs.count - 1;
     }
     
+    /**
+    Count the current score of the innings
+    
+    :returns: A Score object containing the current runs and wickets
+    */
     private func countScore() -> Score {
         var iRuns = 0;
         var iWickets = 0;
@@ -115,5 +121,25 @@ public class Innings {
         }
         
         return Score(runs: iRuns, wickets: iWickets);
+    }
+    
+    /**
+    Count how many overs have been completed in the over
+    
+    :returns: An OverCount object with the current overs and balls
+    */
+    private func countOvers() -> OverCount {
+        var iOvers = m_overs.count - 1;
+        var iBalls = 0;
+        
+        if let ballsRemaining = m_overs.last?.getBallsLeft() {
+            if ballsRemaining == 0 {
+                iOvers++;
+            } else {
+                iBalls = 6 - Int(ballsRemaining);
+            }
+        }
+        
+        return OverCount(completedOvers: iOvers, balls: iBalls);
     }
 }
