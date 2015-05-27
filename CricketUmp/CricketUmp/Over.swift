@@ -46,14 +46,19 @@ public class Over {
     
     :returns: The number of runs scored in the over
     */
-    public func getOverRuns() -> UInt8 {
+    public func getOverRuns() -> Score {
         var iRuns:UInt8 = 0;
+        var iWickets:UInt8 = 0;
         
         for delivery in m_deliveries {
             iRuns += delivery.totalRuns;
+            
+            if delivery.wicket != .None {
+                iWickets++;
+            }
         }
         
-        return iRuns;
+        return Score(runs: Int(iRuns), wickets: Int(iWickets));
     }
     
     /**
@@ -61,8 +66,8 @@ public class Over {
 
     :return: True if the over is complete with this delivery, false otherwise.
     */
-    public func addDelivery(delivery:DeliveryResult, runs iRuns:UInt8) -> Bool {
-        m_deliveries.append(Delivery(result: delivery, runs: iRuns, striker: m_iStrikerId, bowler: m_iNonStrikerId));
+    public func addDelivery(delivery:DeliveryResult, wicket:Wicket, runs iRuns:UInt8) -> Bool {
+        m_deliveries.append(Delivery(result: delivery, wicket:wicket, runs: iRuns, striker: m_iStrikerId, bowler: m_iNonStrikerId));
         
         return getBallsLeft() == 0;
     }

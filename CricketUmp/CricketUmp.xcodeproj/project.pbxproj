@@ -26,6 +26,8 @@
 		2996EEBE1B12116500A26564 /* Innings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEBD1B12116500A26564 /* Innings.swift */; };
 		2996EEC01B12158300A26564 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEBF1B12158300A26564 /* Game.swift */; };
 		2996EEC21B15282900A26564 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEC11B15282800A26564 /* Timer.swift */; };
+		2996EEC51B15486100A26564 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEC41B15486100A26564 /* GameViewController.swift */; };
+		2996EEC71B1558D100A26564 /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2996EEC61B1558D100A26564 /* Definitions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		2996EEBD1B12116500A26564 /* Innings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Innings.swift; sourceTree = "<group>"; };
 		2996EEBF1B12158300A26564 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		2996EEC11B15282800A26564 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = ../../../FencingRefSwift/FencingRefSwift/Timer.swift; sourceTree = "<group>"; };
+		2996EEC41B15486100A26564 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		2996EEC61B1558D100A26564 /* Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,7 @@
 				2996EE271B0C2FBF00A26564 /* Main.storyboard */,
 				2996EE571B0D831000A26564 /* device4in.storyboard */,
 				2996EE561B0C30BB00A26564 /* CricketUmp-Bridging-Header.h */,
+				2996EEC31B15484300A26564 /* Controllers */,
 				2996EE591B0EB48A00A26564 /* Game */,
 			);
 			path = CricketUmp;
@@ -173,8 +178,17 @@
 				2996EEBB1B0FD05100A26564 /* Over.swift */,
 				2996EEBD1B12116500A26564 /* Innings.swift */,
 				2996EEBF1B12158300A26564 /* Game.swift */,
+				2996EEC61B1558D100A26564 /* Definitions.swift */,
 			);
 			name = Game;
+			sourceTree = "<group>";
+		};
+		2996EEC31B15484300A26564 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2996EEC41B15486100A26564 /* GameViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,10 +294,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2996EEC71B1558D100A26564 /* Definitions.swift in Sources */,
 				2996EE501B0C303E00A26564 /* NSString+FontAwesome.m in Sources */,
 				2996EE511B0C303E00A26564 /* String+FontAwesome.swift in Sources */,
 				2996EE4E1B0C303E00A26564 /* FAImageView.m in Sources */,
 				2996EEC21B15282900A26564 /* Timer.swift in Sources */,
+				2996EEC51B15486100A26564 /* GameViewController.swift in Sources */,
 				2996EEBC1B0FD05100A26564 /* Over.swift in Sources */,
 				2996EEBE1B12116500A26564 /* Innings.swift in Sources */,
 				2996EE261B0C2FBF00A26564 /* ViewController.swift in Sources */,

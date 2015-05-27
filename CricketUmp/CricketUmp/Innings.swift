@@ -52,7 +52,7 @@ public class Innings {
         "overs" (Int) is the number of overs fully completed;
         "balls" (Int8) is the number of legal deliveries made in the current over
     */
-    public func getOversCompleted() -> (overs:Int, balls:Int8) {
+    public func getOversCompleted() -> OverCount {
         return (m_currentOver, 6 - m_overs[m_currentOver].getBallsLeft());
     }
     
@@ -76,12 +76,14 @@ public class Innings {
     /**
     Adds a delivery to the current over
     */
-    public func addDelivery(delivery:DeliveryResult, batterRuns iRuns:UInt8) {
+    public func addDelivery(delivery:DeliveryResult, wicket:Wicket, batterRuns iRuns:Int) {
         
         // Over is completed
-        if m_overs[m_currentOver].addDelivery(delivery, runs: iRuns) {
+        if m_overs[m_currentOver].addDelivery(delivery, wicket: wicket, runs: UInt8(iRuns)) {
             
         }
+        
+        m_game.updateScore(countScore());
     }
     
     /**
@@ -90,7 +92,7 @@ public class Innings {
     :fTime: The current time of the timer
     */
     func onTimerTick(fTime:NSTimeInterval) {
-        
+        m_game.updateTimer(fTime);
     }
     
     /**
@@ -99,5 +101,19 @@ public class Innings {
     private func createNewOver() {
         m_overs.append(Over(iBalls: 6, bowler: 0, striker: 0, nonStriker: 0));
         m_currentOver = m_overs.count - 1;
+    }
+    
+    private func countScore() -> Score {
+        var iRuns = 0;
+        var iWickets = 0;
+        var overScore:Score;
+        
+        for over in m_overs {
+            overScore = over.getOverRuns();
+            iRuns += Int(overScore.runs);
+            iWickets += Int(overScore.wickets);
+        }
+        
+        return Score(runs: iRuns, wickets: iWickets);
     }
 }

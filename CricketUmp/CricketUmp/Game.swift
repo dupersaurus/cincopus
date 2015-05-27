@@ -8,12 +8,6 @@
 
 import Foundation
 
-public enum Team {
-    case None
-    case Home
-    case Away
-}
-
 public class Game {
     
     // MARK: - Member variables
@@ -26,7 +20,7 @@ public class Game {
     /// Who bats first
     private var m_batFirst:Team;
     
-    /// Number of innings for the game
+    /// Number of innings for the game, per team
     private let m_iNumInnings:UInt8;
     
     /// Number of overs per inning
@@ -50,14 +44,14 @@ public class Game {
     }
     
     /// Update the over count
-    private var m_cbUpdateOvers:((overs:(Int, Int))->Void)?;
+    private var m_cbUpdateOvers:((completed:Int, balls:Int)->Void)?;
     
     /**
     Set the method to call when the over is updated
     
     :param: callback The callback
     */
-    public func setUpdateOversCallback(callback:((overs:(Int, Int))->Void)?) {
+    public func setUpdateOversCallback(callback:((completed:Int, balls:Int)->Void)?) {
         m_cbUpdateOvers = callback;
     }
     
@@ -74,6 +68,13 @@ public class Game {
     }
     
     // MARK: - Init
+    /**
+    Create a game
+    
+    :param: innings The number of innings per team
+    
+    :param: overs The number of overs per team
+    */
     init(innings iInnings:UInt8, overs iOvers:UInt8, homeTeam iHome:UInt16 = 0, awayTeam iAway:UInt16 = 0) {
         m_iHomeId = iHome;
         m_iAwayId = iAway;
@@ -103,7 +104,8 @@ public class Game {
     Begin playing the current inning
     */
     public func letsPlay() {
-        
+        m_innings.append(Innings(game: self, overs: m_iNumOvers, battingId: 0));
+        m_innings.last?.beginPlay();
     }
     
     // MARK: - Input from the game components
@@ -115,5 +117,26 @@ public class Game {
     */
     func inningsConcluded(innings:Innings) {
         
+    }
+    
+    func updateScore(score:Score) {
+        m_cbUpdateScore?(runs: score.runs, wickets: score.wickets);
+    }
+    
+    func updateOvers(overs:OverCount) {
+        m_cbUpdateOvers?(completed: overs.overs, balls: overs.balls);
+    }
+    
+    func updateTimer(fTime:NSTimeInterval) {
+        m_cbTimerTick?(elapsedTime: fTime);
+    }
+    
+    // MARK: - Information
+    
+    /**
+    Returns the current innings.
+    */
+    public func getCurrentInnings() -> Innings? {
+        return m_innings.last;
     }
 }

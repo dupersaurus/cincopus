@@ -8,25 +8,6 @@
 
 import Foundation
 
-/**
-    All of the possible scoring results of a delivery.
-
-    - *Legal* is a legal delivery
-    - *Byes* for byes
-    - *LegByes* for leg byes
-    - *Wide* for a wide ball
-    - *NoBall* for a no-ball
-    - *Wicket* for a wicket
- */
-public enum DeliveryResult {
-    case Legal
-    case Byes
-    case LegByes
-    case Wide
-    case NoBall
-    case Wicket
-}
-
 public class Delivery {
     /** Id of the bowler for the delivery */
     private let m_iBowlerId:UInt8;
@@ -36,6 +17,9 @@ public class Delivery {
     
     /** The result of the delivery */
     private let m_result:DeliveryResult;
+    
+    /** Type of wicket */
+    private let m_wicket:Wicket;
     
     /** The number of runs/extras scored from the delivery. 
     Does not count the wide or no ball penalty run. */
@@ -52,17 +36,23 @@ public class Delivery {
     
       :bowler: Id of the bowler
      */
-    public init(result:DeliveryResult, runs iRuns:UInt8, striker iBatterId:UInt8 = 0, bowler iBowlerId:UInt8 = 0) {
+    public init(result:DeliveryResult, wicket:Wicket, runs iRuns:UInt8, striker iBatterId:UInt8 = 0, bowler iBowlerId:UInt8 = 0) {
         m_iBatterId = iBatterId;
         m_iBowlerId = iBowlerId;
         
         m_result = result;
         m_iRuns = iRuns;
+        m_wicket = wicket;
     }
     
     /// The result of the delivery
     public var result:DeliveryResult {
         return m_result;
+    }
+    
+    /// The type of wicket that occurred with the delivery
+    public var wicket:Wicket {
+        return m_wicket;
     }
     
     /// Number of extra runs scored. For wide and no-ball, runs without the penalty. Otherwise, exactly the same as totalRuns.
