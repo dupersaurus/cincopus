@@ -79,13 +79,46 @@ public class Innings {
     public func addDelivery(delivery:DeliveryResult, wicket:Wicket, batterRuns iRuns:Int) {
         
         // Over is completed
-        if m_overs[m_currentOver].addDelivery(delivery, wicket: wicket, runs: UInt8(iRuns)) {
-            createNewOver();
-        }
-        
+        var bNew:Bool = m_overs[m_currentOver].addDelivery(delivery, wicket: wicket, runs: UInt8(iRuns))
         m_game.updateScore(countScore());
         m_game.updateOvers(countOvers());
+        
+        if bNew {
+            createNewOver();
+        }
     }
+    
+    /**
+    Get a list of the last deliveries.
+    
+    :param: count The number of deliveries to get.
+    
+    :returns: An array of deliveries up to the given count
+    */
+    public func getLastDeliveries(count iCount:Int) -> [Delivery] {
+        var deliveries:[Delivery] = [];
+        var overDeliveries:[Delivery];
+        
+        for var iOvers = m_overs.count - 1; iOvers >= 0; iOvers-- {
+            overDeliveries = m_overs[iOvers].getDeliveries();
+            
+            for var iBalls = overDeliveries.count - 1; iBalls >= 0; iBalls-- {
+                deliveries.append(overDeliveries[iBalls]);
+                
+                if deliveries.count >= iCount {
+                    break;
+                }
+            }
+            
+            if deliveries.count >= iCount {
+                break;
+            }
+        }
+        
+        return deliveries;
+    }
+    
+    // MARK: - Callbacks
     
     /**
     Called by the timer on each tick
@@ -95,6 +128,8 @@ public class Innings {
     func onTimerTick(fTime:NSTimeInterval) {
         m_game.updateTimer(fTime);
     }
+    
+    // MARK: - Internals
     
     /**
     Create a new over and set it as current
@@ -133,11 +168,11 @@ public class Innings {
         var iBalls = 0;
         
         if let ballsRemaining = m_overs.last?.getBallsLeft() {
-            if ballsRemaining == 0 {
+            /*if ballsRemaining == 0 {
                 iOvers++;
-            } else {
+            } else {*/
                 iBalls = 6 - Int(ballsRemaining);
-            }
+            //}
         }
         
         return OverCount(completedOvers: iOvers, balls: iBalls);

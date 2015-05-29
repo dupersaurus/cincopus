@@ -62,6 +62,15 @@ public class Over {
     }
     
     /**
+    Get all deliveries in the over.
+    
+    :return: An array of all of the over's deliveries
+    */
+    func getDeliveries() -> [Delivery] {
+        return m_deliveries;
+    }
+    
+    /**
     Add a delivery to the over.
 
     :return: True if the over is complete with this delivery, false otherwise.

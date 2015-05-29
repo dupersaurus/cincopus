@@ -19,6 +19,8 @@ class GameViewController : UIViewController {
     
     private var m_userDefaults:NSUserDefaults?;
     
+    @IBOutlet var m_deliveries: [DeliveryView]!
+    
     // MARK: - ViewController interface
     /// Label displays the current innings time
     @IBOutlet weak var m_inningsTimerLabel: UILabel!
@@ -31,6 +33,7 @@ class GameViewController : UIViewController {
     
     @IBOutlet weak var m_overCountLabel: UILabel!
     @IBOutlet weak var m_deliveryResults: UISegmentedControl!
+    
     /**
     Called by buttons to set the number of runs/extras scored.
     
@@ -105,6 +108,17 @@ class GameViewController : UIViewController {
             m_overCountLabel.text = "Overs: \((m_overs?.overs)!).\((m_overs?.balls)!)";
         } else {
             m_overCountLabel.text = "Overs: 0.0";
+        }
+        
+        let lastDeliveries:[Delivery]? = m_game?.getCurrentInnings()?.getLastDeliveries(count: 6);
+        var overTracker:OverCount = count;
+        
+        for var i = 0; i < lastDeliveries?.count; i++ {
+            m_deliveries[i].setDelivery(overTracker, delivery: lastDeliveries![i]);
+            
+            if lastDeliveries![i].isLegalDelivery() {
+                overTracker = overTracker--;
+            }
         }
     }
     

@@ -76,6 +76,30 @@ public struct OverCount {
     }
 }
 
+postfix func ++ (over:OverCount) -> OverCount {
+    var iNewBalls = over.balls + 1;
+    var iNewOvers = over.overs;
+    
+    if iNewBalls > 6 {
+        iNewOvers++;
+        iNewBalls -= 6;
+    }
+    
+    return OverCount(completedOvers: iNewOvers, balls: iNewBalls);
+}
+
+postfix func -- (over:OverCount) -> OverCount {
+    var iNewBalls = over.balls - 1;
+    var iNewOvers = over.overs;
+    
+    if iNewBalls < 0 {
+        iNewOvers--;
+        iNewBalls += 6;
+    }
+    
+    return OverCount(completedOvers: iNewOvers, balls: iNewBalls);
+}
+
 /// A handy wrapper for passing scores, easier than having to tuple everywhere.
 public struct Score {
     private let m_iRuns:Int;
