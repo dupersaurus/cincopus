@@ -21,6 +21,11 @@ class GameViewController : UIViewController {
     
     @IBOutlet var m_deliveries: [DeliveryView]!
     
+    private var m_pendingWicket:Wicket = .None;
+    
+    // MARK: - Other View Controllers
+    private var m_scoreVC:ScoreViewController?;
+    
     // MARK: - ViewController interface
     /// Label displays the current innings time
     @IBOutlet weak var m_inningsTimerLabel: UILabel!
@@ -40,7 +45,16 @@ class GameViewController : UIViewController {
     :param: sender The button that was selected. The tag of the object denotes how many runs.
     */
     @IBAction func selectScoredRuns(sender: UIButton) {
-        m_game?.getCurrentInnings()?.addDelivery(getCurrentDeliveryResult(), wicket: Wicket.None, batterRuns: sender.tag);
+        
+        // TODO: Run this through the game, not the innings directly
+        var bDone:Bool? = m_game?.getCurrentInnings()?.addDelivery(getCurrentDeliveryResult(), wicket: m_pendingWicket, batterRuns: sender.tag)
+        
+        if bDone != nil && !(bDone!) {
+            m_game?.getCurrentInnings()?.pauseInnings();
+            showScoreDisplay();
+        }
+        
+        m_pendingWicket = .None;
     }
     
     /**
@@ -50,11 +64,19 @@ class GameViewController : UIViewController {
         
     }
     
+    @IBAction func toggleTimer(sender: AnyObject) {
+        m_game?.getCurrentInnings()?.toggleInningsTimer();
+    }
+    
     /**
     Called by the wicket button
     */
     @IBAction func selectWicket(sender: UIButton) {
-        
+        m_pendingWicket = Wicket.Bowled;
+    }
+    
+    @IBAction func undoLastBall(sender: AnyObject) {
+        m_game?.getCurrentInnings()?.undoLastDelivery();
     }
     
     override func viewDidLoad() {
@@ -62,6 +84,10 @@ class GameViewController : UIViewController {
         m_userDefaults = NSUserDefaults.standardUserDefaults();
         
         startGame(Game(innings: 1, overs: 40, homeTeam: 0, awayTeam: 0));
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent;
     }
     
     // MARK: - Game management
@@ -96,6 +122,24 @@ class GameViewController : UIViewController {
         m_game?.letsPlay();
     }
     
+    func nextInnings() {
+        m_game?.letsPlay();
+        
+        onOversChange(OverCount());
+        onScoreChange(Score());
+        onTimerTick(0);
+    }
+    
+    func showScoreDisplay() {
+        if m_scoreVC == nil {
+            m_scoreVC = self.storyboard!.instantiateViewControllerWithIdentifier("scoreScreen") as? ScoreViewController;
+        }
+        
+        presentViewController(m_scoreVC!, animated: true, completion: nil);
+        
+        m_scoreVC?.setGame(m_game!, vc: self);
+    }
+    
     // MARK: - Callbacks
     
     /**
@@ -105,19 +149,23 @@ class GameViewController : UIViewController {
         m_overs = count;
         
         if (m_overs != nil) {
-            m_overCountLabel.text = "Overs: \((m_overs?.overs)!).\((m_overs?.balls)!)";
+            m_overCountLabel.text = "Overs: \((m_overs?.overs)!).\((m_overs?.balls)!) of \((m_game?.oversPerInnings)!)";
         } else {
-            m_overCountLabel.text = "Overs: 0.0";
+            m_overCountLabel.text = "Overs: 0.0 of \((m_game?.oversPerInnings)!)";
         }
         
         let lastDeliveries:[Delivery]? = m_game?.getCurrentInnings()?.getLastDeliveries(count: 6);
         var overTracker:OverCount = count;
         
-        for var i = 0; i < lastDeliveries?.count; i++ {
-            m_deliveries[i].setDelivery(overTracker, delivery: lastDeliveries![i]);
-            
-            if lastDeliveries![i].isLegalDelivery() {
-                overTracker = overTracker--;
+        for var i = 0; i < m_deliveries.count; i++ {
+            if i >= lastDeliveries?.count {
+                m_deliveries[i].empty();
+            } else {
+                m_deliveries[i].setDelivery(overTracker, delivery: lastDeliveries![i]);
+                
+                if lastDeliveries![i].isLegalDelivery() {
+                    overTracker = overTracker--;
+                }
             }
         }
     }

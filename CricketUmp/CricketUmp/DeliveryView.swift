@@ -65,4 +65,10 @@ class DeliveryView: UIView {
         
         m_resultLabel!.text = sResult;
     }
+    
+    func empty() {
+        m_runsLabel?.text = "";
+        m_overLabel?.text = "";
+        m_resultLabel?.text = "";
+    }
 }

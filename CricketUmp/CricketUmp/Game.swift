@@ -26,6 +26,10 @@ public class Game {
     /// Number of overs per inning
     private let m_iNumOvers:UInt8;
     
+    public var oversPerInnings:UInt8 {
+        return m_iNumOvers;
+    }
+    
     /// Innings for the game
     private var m_innings:[Innings];
     
@@ -115,7 +119,7 @@ public class Game {
     
     :innings: the innings that is concluded
     */
-    func inningsConcluded(innings:Innings) {
+    func inningsConcluded() {
         
     }
     
@@ -138,5 +142,9 @@ public class Game {
     */
     public func getCurrentInnings() -> Innings? {
         return m_innings.last;
+    }
+    
+    public func getInnings() -> (innings:[Innings], numInnings:UInt8) {
+        return (m_innings, m_iNumInnings);
     }
 }

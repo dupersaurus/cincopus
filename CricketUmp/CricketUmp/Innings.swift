@@ -56,12 +56,20 @@ public class Innings {
         return OverCount(completedOvers: m_currentOver, balls: 6 - m_overs[m_currentOver].getBallsLeft());
     }
     
+    public func getScore() -> Score {
+        return countScore();
+    }
+    
+    public func getInningsTime() -> NSTimeInterval {
+        return (m_timer?.currentTime)!;
+    }
+    
     /**
     Begin the innings
     */
     func beginPlay() {
         m_startDate = NSDate();
-        m_timer?.start();
+        //m_timer?.start();
         
         createNewOver();
     }
@@ -73,10 +81,16 @@ public class Innings {
         m_timer?.stop();
     }
     
+    func toggleInningsTimer() {
+        m_timer?.toggle();
+    }
+    
     /**
     Adds a delivery to the current over
+    
+    :returns: False if this concludes the innings
     */
-    public func addDelivery(delivery:DeliveryResult, wicket:Wicket, batterRuns iRuns:Int) {
+    public func addDelivery(delivery:DeliveryResult, wicket:Wicket, batterRuns iRuns:Int) -> Bool {
         
         // Over is completed
         var bNew:Bool = m_overs[m_currentOver].addDelivery(delivery, wicket: wicket, runs: UInt8(iRuns))
@@ -84,8 +98,32 @@ public class Innings {
         m_game.updateOvers(countOvers());
         
         if bNew {
-            createNewOver();
+            if m_overs.count >= Int(m_iOverLimit) {
+                return false;
+            } else {
+                createNewOver();
+            }
         }
+        
+        return true;
+    }
+    
+    public func undoLastDelivery() {
+        if m_overs.count == 0 {
+            return;
+        }
+        
+        var bSuccess:Bool? = m_overs.last?.undoLastDelivery();
+        
+        // Need to go to the next over
+        if m_overs.count > 1 && (bSuccess != nil) && !(bSuccess!) {
+            m_overs.removeLast();
+            m_overs.last?.undoLastDelivery();
+            m_currentOver--;
+        }
+        
+        m_game.updateScore(countScore());
+        m_game.updateOvers(countOvers());
     }
     
     /**

@@ -98,4 +98,18 @@ public class Over {
         m_deliveries[iIndex] = delivery;
         return true;
     }
+    
+    /**
+    Removes the last delivery
+    
+    :returns: False if there are no deliveries to undo in the over
+    */
+    public func undoLastDelivery() -> Bool {
+        if m_deliveries.count == 0 {
+            return false;
+        }
+        
+        m_deliveries.removeLast();
+        return true;
+    }
 }
